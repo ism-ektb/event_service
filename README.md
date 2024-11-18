@@ -5,5 +5,3 @@
 ---
 **Прошу обновлять postman тесты при дальнейшей разработке проекта**
 Тесты находятся в папке postman
----
-Интеграционные тесты используют файл ресурсов src/test/resources/application-integrationtest.properties

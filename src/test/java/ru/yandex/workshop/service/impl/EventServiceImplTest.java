@@ -7,7 +7,10 @@ import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
+import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
+import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 import ru.yandex.workshop.dto.LocationDto;
 import ru.yandex.workshop.dto.event.EventDto;
 import ru.yandex.workshop.dto.event.NewEventDto;
@@ -26,14 +29,18 @@ import static org.hamcrest.Matchers.nullValue;
 import static org.junit.jupiter.api.Assertions.*;
 
 @Transactional
+@Testcontainers
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.NONE)
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
-@TestPropertySource(locations = "classpath:application-integrationtest.properties")
 class EventServiceImplTest {
     @Autowired
     private EventService eventService;
     private final EntityManager em;
+
+    @Container
+    @ServiceConnection
+    static PostgreSQLContainer<?> postgreSQLContainer = new PostgreSQLContainer<>("postgres:16.1");
 
     @Test
     void add() {

@@ -79,7 +79,8 @@ class EventServiceImplTest {
                 LocalDateTime.now().plusDays(1),
                 LocalDateTime.now().plusDays(2),
                 locationQuery.setParameter("lat", 66f).getSingleResult(),
-                1L);
+                1L,
+                null);
         em.persist(event);
         em.flush();
 
@@ -121,7 +122,8 @@ class EventServiceImplTest {
                 LocalDateTime.now().plusDays(1),
                 LocalDateTime.now().plusDays(2),
                 locationQuery.setParameter("lat", 66f).getSingleResult(),
-                1L);
+                1L,
+                null);
         em.persist(event);
         em.flush();
 
@@ -153,7 +155,8 @@ class EventServiceImplTest {
                 LocalDateTime.now().plusDays(1),
                 LocalDateTime.now().plusDays(2),
                 locationQuery.setParameter("lat", 66f).getSingleResult(),
-                1L);
+                1L,
+                null);
         em.persist(event);
         em.flush();
 
@@ -179,7 +182,8 @@ class EventServiceImplTest {
                 LocalDateTime.now().plusDays(1),
                 LocalDateTime.now().plusDays(2),
                 locationQuery.setParameter("lat", 66f).getSingleResult(),
-                1L);
+                1L,
+                null);
         em.persist(event);
         em.flush();
 
@@ -202,7 +206,8 @@ class EventServiceImplTest {
                 LocalDateTime.now().plusDays(1),
                 LocalDateTime.now().plusDays(2),
                 locationQuery.setParameter("lat", 66f).getSingleResult(),
-                1L);
+                1L,
+                null);
         em.persist(event);
         em.flush();
 
@@ -229,7 +234,8 @@ class EventServiceImplTest {
                 LocalDateTime.now().plusDays(1),
                 LocalDateTime.now().plusDays(2),
                 locationQuery.setParameter("lat", 66f).getSingleResult(),
-                1L);
+                1L,
+                null);
         em.persist(event);
         em.flush();
 

@@ -41,7 +41,7 @@ public class OrganizerController {
     public OrganizerDto update(@RequestHeader("X-Sharer-User-Id") long userId,
                            @PathVariable("organizerId") long organizerId,
                            @PathVariable("eventId") long eventId,
-                           @RequestParam String role) {
+                           @RequestParam (name = "role") String role) {
         return organizerService.update(userId, eventId, organizerId, role);
     }
 

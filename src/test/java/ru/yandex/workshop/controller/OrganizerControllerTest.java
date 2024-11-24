@@ -7,21 +7,16 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import ru.yandex.workshop.dto.LocationDto;
 import ru.yandex.workshop.dto.OrganizerDto;
 import ru.yandex.workshop.dto.event.EventDto;
-import ru.yandex.workshop.dto.event.NewEventDto;
-import ru.yandex.workshop.service.EventService;
 import ru.yandex.workshop.service.OrganizerService;
 
 import java.nio.charset.StandardCharsets;
-import java.time.LocalDateTime;
 import java.util.Collections;
 
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
@@ -38,8 +33,6 @@ class OrganizerControllerTest {
     private MockMvc mvc;
     @Autowired
     ObjectMapper mapper;
-    @MockBean
-    EventService eventService;
 
     @MockBean
     OrganizerService organizerService;
@@ -52,12 +45,6 @@ class OrganizerControllerTest {
             "2028-12-25 04:41:06",
             new LocationDto(66f, 100f),
             1L);
-
-    private final NewEventDto newEventDto = new NewEventDto("Квадроциклы",
-            "Лучшие квадроциклы в городе",
-            LocalDateTime.now().plusDays(1),
-            LocalDateTime.now().plusDays(2),
-            new LocationDto(66f, 100f));
 
     private final OrganizerDto organizerDto = new OrganizerDto(1, eventDto.getId(), "менеджер");
 

@@ -1,0 +1,447 @@
+{
+	"info": {
+		"_postman_id": "42f3847d-856c-46a7-a877-e6fd9cd6f155",
+		"name": "Workshop - Organizers",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27687864"
+	},
+	"item": [
+		{
+			"name": "New Event",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function() {\r",
+							"    pm.expect(pm.response.code).to.equal(201);  // код ответа должен быть равен 201 OK\r",
+							"    pm.response.to.be.withBody; // ответ должен содержать тело\r",
+							"    pm.response.to.be.json; // и тело ответа должно быть в формате JSON\r",
+							"}); "
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Sharer-User-Id",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"name\" : \"event4\",\r\n\t\"description\" : \"description 4 long long long\",\r\n\t\"startDateTime\" : \"2024-12-10 18:20:25\",\r\n\t\"endDateTime\" : \"2024-12-10 23:00:00\",\r\n\t\"location\" : {\r\n\t\t\"lat\" : 254,\r\n\t\t\"lon\" : 784\r\n\t}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/events",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Event Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function() {\r",
+							"    pm.expect(pm.response.code).to.equal(201);  // код ответа должен быть равен 201 OK\r",
+							"    pm.response.to.be.withBody; // ответ должен содержать тело\r",
+							"    pm.response.to.be.json; // и тело ответа должно быть в формате JSON\r",
+							"}); "
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Sharer-User-Id",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"name\" : \"event1\",\r\n\t\"description\" : \"description 1 long long long\",\r\n\t\"startDateTime\" : \"2024-12-10 18:20:25\",\r\n\t\"endDateTime\" : \"2024-12-10 23:00:00\",\r\n\t\"location\" : {\r\n\t\t\"lat\" : 254,\r\n\t\t\"lon\" : 784\r\n\t}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/events",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Organizer Event Not Exists",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 404 и данные в формате json\", function() {\r",
+							"    pm.expect(pm.response.code).to.equal(404);  // код ответа должен быть равен 404\r",
+							"    pm.response.to.be.withBody; // ответ должен содержать тело\r",
+							"    pm.response.to.be.json; // и тело ответа должно быть в формате JSON\r",
+							"}); "
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Sharer-User-Id",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/events/100/organizers/3?role=исполнитель",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"events",
+						"100",
+						"organizers",
+						"3"
+					],
+					"query": [
+						{
+							"key": "role",
+							"value": "исполнитель"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Organizer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function() {\r",
+							"    pm.expect(pm.response.code).to.equal(201);  // код ответа должен быть равен 201 OK\r",
+							"    pm.response.to.be.withBody; // ответ должен содержать тело\r",
+							"    pm.response.to.be.json; // и тело ответа должно быть в формате JSON\r",
+							"}); "
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Sharer-User-Id",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/events/2/organizers/3?role=исполнитель",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"events",
+						"2",
+						"organizers",
+						"3"
+					],
+					"query": [
+						{
+							"key": "role",
+							"value": "исполнитель"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Organizer update role",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function() {\r",
+							"    pm.response.to.be.ok; // код ответа должен быть равен 200 OK\r",
+							"    pm.response.to.be.withBody; // ответ должен содержать тело\r",
+							"    pm.response.to.be.json; // и тело ответа должно быть в формате JSON\r",
+							"}); "
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "X-Sharer-User-Id",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/events/2/organizers/3?role=менеджер",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"events",
+						"2",
+						"organizers",
+						"3"
+					],
+					"query": [
+						{
+							"key": "role",
+							"value": "менеджер"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Organizer update role Wrong user Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 404 или 409 и данные в формате json\", function() {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([404, 409]) // код ответа должен быть равен 409\r",
+							"    pm.response.to.be.withBody; // ответ должен содержать тело\r",
+							"    pm.response.to.be.json; // и тело ответа должно быть в формате JSON\r",
+							"}); "
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "X-Sharer-User-Id",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/events/1/organizers/3?role=менеджер",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"events",
+						"1",
+						"organizers",
+						"3"
+					],
+					"query": [
+						{
+							"key": "role",
+							"value": "менеджер"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Event Organizers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function() {\r",
+							"    pm.response.to.be.ok; // код ответа должен быть равен 200 OK\r",
+							"    pm.response.to.be.withBody; // ответ должен содержать тело\r",
+							"    pm.response.to.be.json; // и тело ответа должно быть в формате JSON\r",
+							"}); "
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Sharer-User-Id",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/events/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"events",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Organizer Wrong user Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 409 и данные в формате json\", function() {\r",
+							"    pm.expect(pm.response.code).to.equal(409);  // код ответа должен быть равен 409\r",
+							"    pm.response.to.be.withBody; // ответ должен содержать тело\r",
+							"    pm.response.to.be.json; // и тело ответа должно быть в формате JSON\r",
+							"}); "
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X-Sharer-User-Id",
+						"value": "225",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/events/2/organizers/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"events",
+						"2",
+						"organizers",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Organizer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 200\", function() {\r",
+							"    pm.response.to.be.ok; // код ответа должен быть равен 200 OK\r",
+							"}); "
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X-Sharer-User-Id",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/events/2/organizers/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"events",
+						"2",
+						"organizers",
+						"3"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

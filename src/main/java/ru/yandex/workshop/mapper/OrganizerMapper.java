@@ -8,11 +8,11 @@ import ru.yandex.workshop.model.OrganizerRole;
 public class OrganizerMapper {
     public static Organizer fromDtoToOrganizer(OrganizerDto dto, OrganizerRole organizerRole,
                                                Event event) {
-        return new Organizer(event, dto.getUserId(), organizerRole);
+        return new Organizer(dto.getUserId(), event, organizerRole);
     }
 
     public static OrganizerDto fromOrganizerToDto(Organizer organizer) {
-        return new OrganizerDto(organizer.getEvent().getId(), organizer.getUserId(),
+        return new OrganizerDto(organizer.getUserId(), organizer.getEvent().getId(),
                 organizer.getOrganizerRole().getName());
     }
 }

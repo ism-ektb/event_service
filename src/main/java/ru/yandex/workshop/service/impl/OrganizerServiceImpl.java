@@ -64,6 +64,7 @@ public class OrganizerServiceImpl implements OrganizerService {
             throw new NotFoundException("Роль " + roleName + " в базе не существует");
         CheckIfUserCanAddDeleteOrganizers(userId, event);
         Organizer organizer = organizerStorage.findByEventIdAndUserId(eventId, organizerId);
+        organizer.setOrganizerRole(organizerRole);
         return OrganizerMapper.fromOrganizerToDto(organizerStorage.save(organizer));
     }
 

@@ -2,22 +2,20 @@ package ru.yandex.workshop.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.apache.catalina.User;
 
 @Entity
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "organizers")
 public class Organizer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "organizer_id")
-    private Long id;
+    private long id;
 
     @Column(name = "user_id")
-    private Long userId;
+    private long userId;
 
     @ManyToOne
     @JoinColumn(name = "event_id")
@@ -27,10 +25,10 @@ public class Organizer {
     @JoinColumn(name = "organizer_role_id", referencedColumnName = "role_id")
     private OrganizerRole organizerRole;
 
-    public Organizer(Event event, Long userId, OrganizerRole organizerRole) {
-        this.setEvent(event);
-        this.setUserId(userId);
-        this.setOrganizerRole(organizerRole);
+    public Organizer(Long organizerId, Event event,  OrganizerRole organizerRole) {
+        setEvent(event);
+        setUserId(organizerId);
+        setOrganizerRole(organizerRole);
     }
 
     private String roleToString(OrganizerRole organizerRole) {

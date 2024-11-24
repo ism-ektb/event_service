@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class OrganizerDto {
     @NotEmpty
     @NotNull
-    private Long userId;
+    private long userId;
 
     @NotEmpty
     @NotNull

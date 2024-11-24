@@ -11,4 +11,6 @@ public interface OrganizerStorage extends JpaRepository<Organizer, Long> {
     Optional<Organizer> findById(Long id);
 
     Organizer findByEventIdAndUserId(long eventId, long organizerId);
+
+    Organizer save (Organizer organizer);
 }

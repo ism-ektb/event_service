@@ -6,7 +6,7 @@ services:
     image: event_service
     container_name: event_service
     ports:
-      - "8080:8080"
+      - "8082:8082"
     depends_on:
       - db
     environment:
@@ -18,7 +18,7 @@ services:
     image: postgres:16.1
     container_name: event-db
     ports:
-      - "6541:5432"
+      - "6542:5432"
     environment:
       - POSTGRES_PASSWORD=root
       - POSTGRES_USER=root

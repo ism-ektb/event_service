@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -25,4 +27,7 @@ public class Event {
     @JoinColumn(name = "location")
     private Location location;
     private Long ownerId;
+
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+    private List<Organizer> organizers = new ArrayList<>();
 }

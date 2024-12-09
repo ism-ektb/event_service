@@ -7,4 +7,6 @@ import ru.yandex.workshop.model.Event;
 
 public interface EventStorage extends JpaRepository<Event, Long> {
     Page<Event> findAllByOwnerId(Long ownerId, Pageable pageable);
+    Page<Event> findAllByOwnerIdAndRegistrationStatusId(Long ownerId, Long regStatusId, Pageable pageable);
+    Page<Event> findAllByRegistrationStatusId(Long regStatusId, Pageable pageable);
 }

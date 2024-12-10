@@ -8,13 +8,14 @@ import ru.yandex.workshop.dto.event.EventDto;
 import ru.yandex.workshop.dto.event.NewEventDto;
 import ru.yandex.workshop.exception.ConflictException;
 import ru.yandex.workshop.exception.NotFoundException;
-import ru.yandex.workshop.mapper.EventMapper;
+import ru.yandex.workshop.mapper.EventMapperImpl;
 import ru.yandex.workshop.mapper.LocationMapper;
 import ru.yandex.workshop.model.Event;
 import ru.yandex.workshop.model.Location;
 import ru.yandex.workshop.service.EventService;
 import ru.yandex.workshop.storage.EventStorage;
 import ru.yandex.workshop.storage.LocationStorage;
+import ru.yandex.workshop.storage.RegistrationStatusStorage;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,8 +26,9 @@ import java.util.List;
 public class EventServiceImpl implements EventService {
     private final EventStorage eventStorage;
     private final LocationStorage locationStorage;
-    private final EventMapper eventMapper;
+    //private final EventMapper eventMapper;
     private final LocationMapper locationMapper;
+    private final RegistrationStatusStorage statusStorage;
 
     /**
      * Создание нового события
@@ -39,11 +41,12 @@ public class EventServiceImpl implements EventService {
             throw new ConflictException("Дата конца не может быть раньше даты начала");
         }
         Location locationWithId = locationStorage.save(locationMapper.toEntity(newEventDto.getLocation()));
-        Event event = eventMapper.toEntity(newEventDto);
+        Event event = EventMapperImpl.fromNewDtoToEvent(newEventDto);
         event.setOwnerId(userId);
         event.setLocation(locationWithId);
         event.setCreatedDateTime(LocalDateTime.now());
-        return eventMapper.toDto(eventStorage.save(event));
+        event.setRegistrationStatus(statusStorage.findByName("открыта"));
+        return EventMapperImpl.fromEventToDto(eventStorage.save(event));
     }
 
     /**
@@ -83,7 +86,7 @@ public class EventServiceImpl implements EventService {
                 ? event.getEndDateTime() : newEventDto.getEndDateTime());
         event.setLocation(newEventDto.getLocation() == null ? event.getLocation()
                 : locationStorage.save(locationMapper.toEntity(newEventDto.getLocation())));
-        return eventMapper.toDto(eventStorage.save(event));
+        return EventMapperImpl.fromEventToDto(eventStorage.save(event));
     }
 
     /**
@@ -97,9 +100,9 @@ public class EventServiceImpl implements EventService {
         Event event = eventStorage.findById(id)
                 .orElseThrow(() -> new NotFoundException("Event: Событие с id=" + id + " не найдено"));
         if (event.getOwnerId() == userId) {
-            return eventMapper.toDto(event);
+            return EventMapperImpl.fromEventToDto(event);
         }
-        EventDto eventDto = eventMapper.toDto(event);
+        EventDto eventDto = EventMapperImpl.fromEventToDto(event);
         eventDto.setCreatedDateTime(null);
         return eventDto;
     }
@@ -115,9 +118,12 @@ public class EventServiceImpl implements EventService {
     public List<EventDto> get(int page, int size, Long ownerId) {
         PageRequest pageRequest = PageRequest.of(page > 0 ? page / size : 0, size);
         if (ownerId != null) {
-            return eventStorage.findAllByOwnerId(ownerId, pageRequest).map(eventMapper::toDto).getContent();
+            return eventStorage.findAllByOwnerIdAndRegistrationStatusId(ownerId, 1L, pageRequest)
+                    .map(EventMapperImpl::fromEventToDto)
+                    .getContent();
         }
-        return eventStorage.findAll(pageRequest).map(eventMapper::toDto).getContent();
+        return eventStorage.findAllByRegistrationStatusId(1L, pageRequest).map(EventMapperImpl::fromEventToDto)
+                .getContent();
     }
 
     /**

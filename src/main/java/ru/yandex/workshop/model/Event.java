@@ -30,4 +30,11 @@ public class Event {
 
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     private List<Organizer> organizers = new ArrayList<>();
+
+    @OneToOne
+    @JoinColumn(name = "reg_status_id")
+    private RegistrationStatus registrationStatus;
+
+    @Column(name = "plimit")
+    private Long plimit;
 }

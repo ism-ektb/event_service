@@ -18,6 +18,7 @@ import ru.yandex.workshop.exception.ConflictException;
 import ru.yandex.workshop.model.Event;
 import ru.yandex.workshop.model.Location;
 import ru.yandex.workshop.service.EventService;
+import ru.yandex.workshop.storage.RegistrationStatusStorage;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -36,6 +37,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class EventServiceImplTest {
     @Autowired
     private EventService eventService;
+
+    @Autowired
+    private final RegistrationStatusStorage statusStorage;
     private final EntityManager em;
 
     @Container
@@ -49,7 +53,8 @@ class EventServiceImplTest {
                 "Лучшие квадроциклы в городе",
                 LocalDateTime.now().plusDays(1),
                 LocalDateTime.now().plusDays(2),
-                new LocationDto(66.6f, 100.1f));
+                new LocationDto(66.6f, 100.1f),
+                3L);
 
         eventService.add(1L, newEventDto);
 
@@ -80,7 +85,9 @@ class EventServiceImplTest {
                 LocalDateTime.now().plusDays(2),
                 locationQuery.setParameter("lat", 66f).getSingleResult(),
                 1L,
-                null);
+                null,
+                statusStorage.findByName("открыта"),
+                4L);
         em.persist(event);
         em.flush();
 
@@ -89,7 +96,8 @@ class EventServiceImplTest {
                 "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 LocalDateTime.now().plusDays(7),
                 LocalDateTime.now().plusDays(8),
-                new LocationDto(66.6f, 100.1f));
+                new LocationDto(66.6f, 100.1f),
+                3L);
 
         TypedQuery<Event> eventQuery = em.createQuery("select e from Event as e where e.name = :name", Event.class);
 
@@ -123,7 +131,9 @@ class EventServiceImplTest {
                 LocalDateTime.now().plusDays(2),
                 locationQuery.setParameter("lat", 66f).getSingleResult(),
                 1L,
-                null);
+                null,
+                statusStorage.findByName("открыта"),
+                5L);
         em.persist(event);
         em.flush();
 
@@ -156,7 +166,9 @@ class EventServiceImplTest {
                 LocalDateTime.now().plusDays(2),
                 locationQuery.setParameter("lat", 66f).getSingleResult(),
                 1L,
-                null);
+                null,
+                statusStorage.findByName("открыта"),
+                7L);
         em.persist(event);
         em.flush();
 
@@ -183,7 +195,9 @@ class EventServiceImplTest {
                 LocalDateTime.now().plusDays(2),
                 locationQuery.setParameter("lat", 66f).getSingleResult(),
                 1L,
-                null);
+                null,
+                statusStorage.findByName("открыта"),
+                5L);
         em.persist(event);
         em.flush();
 
@@ -207,7 +221,9 @@ class EventServiceImplTest {
                 LocalDateTime.now().plusDays(2),
                 locationQuery.setParameter("lat", 66f).getSingleResult(),
                 1L,
-                null);
+                null,
+                statusStorage.findByName("открыта"),
+                6L);
         em.persist(event);
         em.flush();
 
@@ -235,7 +251,9 @@ class EventServiceImplTest {
                 LocalDateTime.now().plusDays(2),
                 locationQuery.setParameter("lat", 66f).getSingleResult(),
                 1L,
-                null);
+                null,
+                statusStorage.findByName("открыта"),
+                8L);
         em.persist(event);
         em.flush();
 

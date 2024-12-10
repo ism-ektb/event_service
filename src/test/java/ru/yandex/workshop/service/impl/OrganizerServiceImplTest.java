@@ -18,6 +18,7 @@ import ru.yandex.workshop.model.Organizer;
 import ru.yandex.workshop.service.EventService;
 import ru.yandex.workshop.service.OrganizerService;
 import ru.yandex.workshop.storage.OrganizerStorage;
+import ru.yandex.workshop.storage.RegistrationStatusStorage;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -43,6 +44,9 @@ class OrganizerServiceImplTest {
     @Autowired
     private OrganizerService organizerService;
 
+    @Autowired
+    private final RegistrationStatusStorage statusStorage;
+
     private final EntityManager em;
 
     private static NewEventDto newEventDto = new NewEventDto(
@@ -50,7 +54,8 @@ class OrganizerServiceImplTest {
             "Лучшие квадроциклы в городе",
             LocalDateTime.now().plusDays(1),
             LocalDateTime.now().plusDays(2),
-            new LocationDto(66.6f, 100.1f));
+            new LocationDto(66.6f, 100.1f),
+            9L);
 
     @Container
     @ServiceConnection

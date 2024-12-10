@@ -1,0 +1,1 @@
+update events set reg_status_id = 1

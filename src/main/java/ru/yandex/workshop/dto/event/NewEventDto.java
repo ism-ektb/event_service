@@ -33,5 +33,5 @@ public class NewEventDto {
     @NotNull
     private LocationDto location;
 
-    private Long participantsLimit;
+    private Long plimit;
 }

@@ -48,7 +48,9 @@ class EventControllerTest {
             "2027-12-25 04:41:06",
             "2028-12-25 04:41:06",
             new LocationDto(66f, 100f),
-            1L);
+            1L,
+            "открыта",
+            5L);
 
     @Test
     void add() throws Exception {
@@ -56,7 +58,8 @@ class EventControllerTest {
                 "Лучшие квадроциклы в городе",
                 LocalDateTime.now().plusDays(1),
                 LocalDateTime.now().plusDays(2),
-                new LocationDto(66, 100));
+                new LocationDto(66, 100),
+                5L);
 
         when(eventService.add(anyLong(), any())).thenReturn(eventDto);
 
@@ -78,7 +81,8 @@ class EventControllerTest {
                 "Лучшие квадроциклы в городе",
                 LocalDateTime.now().plusDays(1),
                 LocalDateTime.now().plusDays(2),
-                new LocationDto(66f, 100f));
+                new LocationDto(66f, 100f),
+                3L);
 
         when(eventService.update(anyLong(), anyLong(), any())).thenReturn(eventDto);
 

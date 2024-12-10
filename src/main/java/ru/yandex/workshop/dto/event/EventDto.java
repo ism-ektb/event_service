@@ -20,5 +20,5 @@ public class EventDto {
     private LocationDto location;
     private Long ownerId;
     private String registrationStatus;
-    private Long participantsLimit;
+    private Long plimit;
 }

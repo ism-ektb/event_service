@@ -35,5 +35,6 @@ public class Event {
     @JoinColumn(name = "reg_status_id")
     private RegistrationStatus registrationStatus;
 
-    private Long participantsLimit;
+    @Column(name = "plimit")
+    private Long plimit;
 }

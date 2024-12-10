@@ -25,3 +25,5 @@ databaseChangeLog:
       file: db/changelog/changeset/add-column-participantsLimit-event-table.sql
   - include:
       file: db/changelog/changeset/update-event-set-participantsLimit.sql
+  - include:
+      file: db/changelog/changeset/rename-column-participantsLimit-event-table.sql

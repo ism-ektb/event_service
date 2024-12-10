@@ -37,14 +37,17 @@ class OrganizerControllerTest {
     @MockBean
     OrganizerService organizerService;
 
-    private final EventDto eventDto = new EventDto(1L,
+    private final EventDto eventDto = new EventDto(
+            1L,
             "Квадроциклы",
             "Лучшие квадроциклы в городе",
             "2026-12-25 04:41:06",
             "2027-12-25 04:41:06",
             "2028-12-25 04:41:06",
             new LocationDto(66f, 100f),
-            1L);
+            1L,
+            null,
+            6L);
 
     private final OrganizerDto organizerDto = new OrganizerDto(1, eventDto.getId(), "менеджер");
 

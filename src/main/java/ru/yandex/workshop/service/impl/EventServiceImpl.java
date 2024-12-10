@@ -1,9 +1,13 @@
 package ru.yandex.workshop.service.impl;
 
+import feign.FeignException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.yandex.workshop.client.UserClient;
+import ru.yandex.workshop.dto.UserOutDto;
 import ru.yandex.workshop.dto.event.EventDto;
 import ru.yandex.workshop.dto.event.NewEventDto;
 import ru.yandex.workshop.exception.ConflictException;
@@ -28,7 +32,11 @@ public class EventServiceImpl implements EventService {
     private final LocationStorage locationStorage;
     //private final EventMapper eventMapper;
     private final LocationMapper locationMapper;
+
+    @Autowired
+    private final UserClient userClient;
     private final RegistrationStatusStorage statusStorage;
+
 
     /**
      * Создание нового события
@@ -41,6 +49,14 @@ public class EventServiceImpl implements EventService {
             throw new ConflictException("Дата конца не может быть раньше даты начала");
         }
         Location locationWithId = locationStorage.save(locationMapper.toEntity(newEventDto.getLocation()));
+        Event event = eventMapper.toEntity(newEventDto);
+        try{
+            UserOutDto user = userClient.getUser(1L, "password", userId);
+        } catch (FeignException e) {
+            if (e.status() == 404) {
+                throw new NotFoundException("Данный пользователь не найден, он не может создать событие");
+            }
+        }
         Event event = EventMapperImpl.fromNewDtoToEvent(newEventDto);
         event.setOwnerId(userId);
         event.setLocation(locationWithId);

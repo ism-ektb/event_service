@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS organizers
     user_id             BIGINT                                  NOT NULL,
     event_id            BIGINT                                  NOT NULL,
     organizer_role_id   BIGINT                                  NOT NULL,
-    CONSTRAINT      pk_organizer_id PRIMARY KEY (organizer_id),
+    CONSTRAINT pk_organizer_id PRIMARY KEY (organizer_id),
     CONSTRAINT fk_organizer_event
         FOREIGN KEY (event_id) REFERENCES events (event_id),
     CONSTRAINT fk_organizer_role

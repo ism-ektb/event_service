@@ -1,9 +1,13 @@
 package ru.yandex.workshop.service.impl;
 
+import feign.FeignException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.yandex.workshop.client.UserClient;
 import ru.yandex.workshop.dto.OrganizerDto;
+import ru.yandex.workshop.dto.UserOutDto;
 import ru.yandex.workshop.exception.ConflictException;
 import ru.yandex.workshop.exception.NotFoundException;
 import ru.yandex.workshop.mapper.OrganizerMapper;
@@ -25,10 +29,20 @@ public class OrganizerServiceImpl implements OrganizerService {
     private final OrganizerStorage organizerStorage;
     private final EventStorage eventStorage;
     private final RoleStorage roleStorage;
+    @Autowired
+    private final UserClient userClient;
+
     @Override
     public OrganizerDto add(long userId, long eventId, long organizerId, String roleName) {
         Event event = eventStorage.findById(eventId)
                 .orElseThrow(() -> new NotFoundException("Event: Событие с id=" + eventId + " не найдено"));
+        try{
+            UserOutDto user = userClient.getUser(1L, "password", userId);
+        } catch (FeignException e) {
+            if (e.status() == 404) {
+                throw new NotFoundException("Пользователь с id = " + userId + "не найден");
+            }
+        }
         OrganizerRole organizerRole = roleStorage.findByName(roleName);
         if (organizerRole == null)
             throw new NotFoundException("Роль " + roleName + " в базе не существует");

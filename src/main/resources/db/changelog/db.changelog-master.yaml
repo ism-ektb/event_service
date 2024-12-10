@@ -1,6 +1,8 @@
 databaseChangeLog:
   - include:
-        file: db/changelog/changeset/drop-all-tables.sql
+      file: db/changelog/changeset/drop-all-tables.sql
+  - include:
+      file: db/changelog/changeset/drop-registration-statuses.sql
   - include:
       file: db/changelog/changeset/create-location-table.sql
   - include:
@@ -11,3 +13,17 @@ databaseChangeLog:
       file: db/changelog/changeset/create-organizer-table.sql
   - include:
       file: db/changelog/changeset/insert-data.sql
+  - include:
+      file: db/changelog/changeset/create-registration_statuses.sql
+  - include:
+      file: db/changelog/changeset/insert-data-registration_statuses.sql
+  - include:
+      file: db/changelog/changeset/add-column-event-table.sql
+  - include:
+      file: db/changelog/changeset/update-event-set-status.sql
+  - include:
+      file: db/changelog/changeset/add-column-participantsLimit-event-table.sql
+  - include:
+      file: db/changelog/changeset/update-event-set-participantsLimit.sql
+  - include:
+      file: db/changelog/changeset/rename-column-participantsLimit-event-table.sql

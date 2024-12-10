@@ -32,4 +32,6 @@ public class NewEventDto {
     private LocalDateTime endDateTime;
     @NotNull
     private LocationDto location;
+
+    private Long plimit;
 }

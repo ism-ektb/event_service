@@ -1,0 +1,1 @@
+update events set participantsLimit = 2

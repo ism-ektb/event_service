@@ -34,4 +34,6 @@ public class Event {
     @OneToOne
     @JoinColumn(name = "reg_status_id")
     private RegistrationStatus registrationStatus;
+
+    private Long participantsLimit;
 }

@@ -33,6 +33,7 @@ public class EventMapperImpl {
         event.setDescription(newDto.getDescription());
         event.setStartDateTime(newDto.getStartDateTime());
         event.setEndDateTime(newDto.getEndDateTime());
+        event.setParticipantsLimit(newDto.getParticipantsLimit());
         return event;
     }
 
@@ -46,7 +47,8 @@ public class EventMapperImpl {
                 event.getEndDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),
                 new LocationDto(event.getLocation().getLat(), event.getLocation().getLon()),
                 event.getOwnerId(),
-                event.getRegistrationStatus().getName()
+                event.getRegistrationStatus().getName(),
+                event.getParticipantsLimit()
         );
     }
 
